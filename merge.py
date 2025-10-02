@@ -27,17 +27,17 @@ def merge_pdfs(input_files, output_file):
         # Validate input files exist
         for file_path in input_files:
             if not os.path.exists(file_path):
-                print(f"❌ Error: File '{file_path}' does not exist.")
+                print(f"Error: File '{file_path}' does not exist.")
                 return False
             
             if not file_path.lower().endswith('.pdf'):
-                print(f"❌ Error: '{file_path}' is not a PDF file.")
+                print(f"Error: '{file_path}' is not a PDF file.")
                 return False
         
         # Merge PDFs
-        print("🔧 Merging PDF files...")
+        print("Merging PDF files...")
         for file_path in input_files:
-            print(f"   📄 Adding: {os.path.basename(file_path)}")
+            print(f"   Adding: {os.path.basename(file_path)}")
             pdf_reader = PdfReader(file_path)
             
             # Add all pages from current PDF
@@ -49,11 +49,11 @@ def merge_pdfs(input_files, output_file):
         with open(output_file, 'wb') as output:
             pdf_writer.write(output)
         
-        print(f"✅ Successfully merged {len(input_files)} files into '{os.path.basename(output_file)}'")
+        print(f"Successfully merged {len(input_files)} files into '{os.path.basename(output_file)}'")
         return True
         
     except Exception as e:
-        print(f"❌ Error merging PDFs: {str(e)}")
+        print(f"Error merging PDFs: {str(e)}")
         return False
 
 
@@ -94,7 +94,7 @@ Examples:
     
     # Check if files are provided
     if not args.files:
-        print("❌ Error: No PDF files specified.")
+        print("Error: No PDF files specified.")
         parser.print_help()
         sys.exit(1)
     
@@ -108,20 +108,20 @@ Examples:
     if not output_file.lower().endswith('.pdf'):
         output_file += '.pdf'
     
-    print(f"📋 PDF Merger")
-    print(f"📁 Input files: {len(args.files)}")
-    print(f"📄 Output file: {output_file}")
+    print(f"PDF Merger")
+    print(f"Input files: {len(args.files)}")
+    print(f"Output file: {output_file}")
     print("-" * 50)
     
     # Merge the PDFs
     success = merge_pdfs(args.files, output_file)
     
     if success:
-        print(f"\n🎉 Merge completed successfully!")
-        print(f"📁 Merged file location: {os.path.abspath(output_file)}")
+        print(f"\nMerge completed successfully!")
+        print(f"Merged file location: {os.path.abspath(output_file)}")
         sys.exit(0)
     else:
-        print(f"\n💥 Merge failed!")
+        print(f"\nMerge failed!")
         sys.exit(1)
 
 
